@@ -1,0 +1,112 @@
+/* General body styling for a centered container */
+body {
+    background: #8c52ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container for the entire weather app */
+#weather-container {
+    background: rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* Common styles for headings and paragraphs */
+h2, h3, p { /* Added h3 selector to style the hourly forecast heading */
+    color: #fff;
+    margin: 8px 0;
+}
+
+/* Input field styling */
+input {
+    /* Corrected the calculation to be a valid CSS value.
+       It must have spaces around the minus sign. */
+    width: calc(100% - 16px);
+    padding: 8px;
+    box-sizing: border-box;
+    /* This was incorrect syntax. 'border-radius' is a single property. */
+    border-radius: 10px;
+    border: 1px solid white;
+    margin-top: 20px;
+}
+
+/* Search button styling */
+button {
+    background: #debff4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100px;
+    font-size: 15px;
+}
+
+/* Button hover effect */
+button:hover {
+    background: #8b48d7;
+}
+
+/* Temperature text styling */
+#temp-div p {
+    /* Corrected syntax. 'font-size' is a single property. */
+    font-size: 60px;
+    /* Corrected syntax. 'margin-top' is a single property. */
+    margin-top: -30px;
+}
+
+/* Weather icon styling */
+#weather-icon {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 10px;
+    margin-bottom: 0;
+    display: none;
+}
+
+/* Hourly forecast section layout */
+#hourly-forecast {
+    margin-top: 50px;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    /* Added gap for better spacing between forecast items */
+    gap: 10px;
+}
+
+/* Individual hourly forecast item container styling */
+.hourly-item {
+    /* The original code had the img selector here, which was incorrect.
+       This selector now correctly targets the parent container. */
+    flex: 0 0 auto;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+/* Styling for the icon within the hourly forecast item */
+.hourly-item img {
+    /* Set a smaller size for the hourly icons */
+    width: 50px;
+    height: 50px;
+}
+
+/* Hourly forecast heading styling */
+#hourly-heading {
+    color: #fff;
+    margin-top: 10px;
+}
