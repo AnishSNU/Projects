@@ -1,0 +1,55 @@
+<!-- Web page for community event registration form with client-side validation -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><strong>Community Registration Form</strong></h2>
+
+    <form id="registrationForm">
+        <!-- Full Name -->
+        <label for="fullName">Full Name*</label><br>
+        <input type="text" id="fullName" name="fullName" required><br><br>
+
+        <!-- Email Address -->
+        <label for="emailAddress">Email Address*</label><br>
+        <input type="email" id="emailAddress" name="emailAddress" required><br><br>
+
+        <!-- Phone Number -->
+        <label for="phoneNumber">Phone Number*</label><br>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required><br><br>
+
+        <!-- Age -->
+        <label for="userAge">Age*</label><br>
+        <input type="number" id="userAge" name="userAge" required><br><br>
+
+        <!-- Gender -->
+        <label for="userGender">Gender*</label><br>
+        <select id="userGender" name="userGender" required>
+            <option value="">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <!-- Interests -->
+        <label>Interests (Choose at least one):</label><br>
+        <input type="checkbox" name="interest" value="Music"> Music<br>
+        <input type="checkbox" name="interest" value="Dance"> Dance<br>
+        <input type="checkbox" name="interest" value="Drama"> Drama<br>
+        <input type="checkbox" name="interest" value="Art"> Art<br><br>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitButton">SUBMIT</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
