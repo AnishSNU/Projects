@@ -1,47 +1,44 @@
-import React from 'react';
-import ProductTable from './ProductTable';
-import RenderLists from './RenderLists';
+// App.js
+// Main application component: manages temperature state and unit conversions.
 
-function App() {
-  const products = [
-    { category: 'Fruits', price: '$1', stocked: true, name: 'Apple' },
-    { category: 'Fruits', price: '$1', stocked: true, name: 'Dragonfruit' },
-    { category: 'Fruits', price: '$2', stocked: false, name: 'Passionfruit' },
-    { category: 'Vegetables', price: '$2', stocked: true, name: 'Spinach' },
-    { category: 'Vegetables', price: '$4', stocked: false, name: 'Pumpkin' },
-    { category: 'Vegetables', price: '$1', stocked: true, name: 'Peas' }
-  ];
+import React, { useState } from "react";
+import Container from "./Container";
+import TextBoxDisplay from "./TextBoxDisplay";
+import ButtonContainer from "./ButtonContainer";
 
-  const fruits = [
-    { name: 'apple', quantity: 95 },
-    { name: 'orange', quantity: 45 },
-    { name: 'banana', quantity: 105 },
-    { name: 'coconut', quantity: 159 },
-    { name: 'pineapple', quantity: 37 }
-  ];
+export default function App() {
+  // Store Celsius as the single source of truth (best practice).
+  const [celsius, setCelsius] = useState(25); // default: 25°C
+  const [isCelsius, setIsCelsius] = useState(true); // toggle between units
 
-  const vegetables = [
-    { name: 'potatoes', quantity: 110 },
-    { name: 'celery', quantity: 15 },
-    { name: 'carrots', quantity: 25 },
-    { name: 'corn', quantity: 63 },
-    { name: 'broccoli', quantity: 50 }
-  ];
+  // Increase Celsius by 1
+  const increaseTemp = () => setCelsius(prev => prev + 1);
 
-  const animals = [
-    { name: 'Lion', scientificName: 'Panthero leo', weight: '140kg', diet: 'meat' },
-    { name: 'Gorilla', scientificName: 'Gorilla beringei', weight: '220kg', diet: 'plants, insects' },
-    { name: 'Zebra', scientificName: 'Equus quagga', weight: '322kg', diet: 'plants' }
-  ];
+  // Decrease Celsius by 1
+  const decreaseTemp = () => setCelsius(prev => prev - 1);
+
+  // Toggle between Celsius and Fahrenheit display
+  const toggleUnit = () => {
+    setIsCelsius(prev => !prev);
+  };
+
+  // Compute Fahrenheit only when needed (derived value)
+  const fahrenheit = (celsius * 9) / 5 + 32;
 
   return (
-    <div>
-      <ProductTable products={products} />
-      <div style={{ marginTop: '30px' }}>
-        <RenderLists fruits={fruits} vegetables={vegetables} animals={animals} />
-      </div>
-    </div>
+    <Container>
+      {/* Display temperature with correct unit */}
+      <TextBoxDisplay
+        temperature={isCelsius ? celsius.toFixed(1) : fahrenheit.toFixed(1)}
+        unit={isCelsius ? "°C" : "°F"}
+      />
+
+      {/* Pass handlers for buttons */}
+      <ButtonContainer
+        onIncrease={increaseTemp}
+        onDecrease={decreaseTemp}
+        onToggleUnit={toggleUnit}
+      />
+    </Container>
   );
 }
-
-export default App;
