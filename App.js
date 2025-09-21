@@ -1,44 +1,41 @@
-// App.js
-// Main application component: manages temperature state and unit conversions.
+/**
+ * App.js
+ * Main countdown clock application.
+ * - Uses one counter (in seconds).
+ * - Handles countdown logic via useEffect.
+ */
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "./Container";
-import TextBoxDisplay from "./TextBoxDisplay";
+import TimerDisplay from "./TimerDisplay";
 import ButtonContainer from "./ButtonContainer";
 
 export default function App() {
-  // Store Celsius as the single source of truth (best practice).
-  const [celsius, setCelsius] = useState(25); // default: 25°C
-  const [isCelsius, setIsCelsius] = useState(true); // toggle between units
+  const [time, setTime] = useState(0);             // total time in seconds
+  const [isRunning, setIsRunning] = useState(false); // countdown state
 
-  // Increase Celsius by 1
-  const increaseTemp = () => setCelsius(prev => prev + 1);
-
-  // Decrease Celsius by 1
-  const decreaseTemp = () => setCelsius(prev => prev - 1);
-
-  // Toggle between Celsius and Fahrenheit display
-  const toggleUnit = () => {
-    setIsCelsius(prev => !prev);
-  };
-
-  // Compute Fahrenheit only when needed (derived value)
-  const fahrenheit = (celsius * 9) / 5 + 32;
+  // Countdown logic with useEffect
+  useEffect(() => {
+    let timerId;
+    if (isRunning && time > 0) {
+      timerId = setInterval(() => setTime((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(timerId);
+  }, [isRunning, time]);
 
   return (
-    <Container>
-      {/* Display temperature with correct unit */}
-      <TextBoxDisplay
-        temperature={isCelsius ? celsius.toFixed(1) : fahrenheit.toFixed(1)}
-        unit={isCelsius ? "°C" : "°F"}
-      />
-
-      {/* Pass handlers for buttons */}
-      <ButtonContainer
-        onIncrease={increaseTemp}
-        onDecrease={decreaseTemp}
-        onToggleUnit={toggleUnit}
-      />
-    </Container>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <Container>
+        <TimerDisplay time={time} />
+        <ButtonContainer
+          onStart={() => setIsRunning(true)}
+          onStop={() => setIsRunning(false)}
+          onReset={() => setTime(0)}
+          setTime={setTime}
+          isRunning={isRunning}
+          time={time}
+        />
+      </Container>
+    </div>
   );
 }
