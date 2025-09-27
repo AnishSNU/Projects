@@ -1,0 +1,25 @@
+public int majorityElement(int[] nums)
+{
+    int count=0;
+    Integer candidate=null;
+
+    for(int num:nums)
+    {
+        if(count==0)
+        {
+            candidate=num;
+        }
+        count+=(num==candidate)?1:-1;
+    }
+    return candidate;
+}
+
+public int singleNumber(int[] nums)
+{
+    int xor=0;
+    for(int i=0;i<nums.length;i++)
+    {
+        xor=xor^nums[i];
+    }
+    return xor;
+}
